@@ -2,7 +2,9 @@
     <h3>Propiedades Computadas</h3>
     <input type="text" v-model="valor">
     {{ valorCalculado }}
-    <ResultadoSection :resultado="valorCalculado"></ResultadoSection>
+    <ResultadoSection v-if="mostrarElemento" :resultado="valorCalculado"></ResultadoSection>
+    <div v-else-if="isNaN(valor)">Debe ser un número para calcular</div>
+    <div v-else>Aquí no se muestra nada</div>
 </template>
 
 <script setup>
@@ -12,6 +14,10 @@
     const valorCalculado = computed(()=> {
         return valor.value * 3;    
     } )
+
+    const mostrarElemento = computed(()=> {
+        return valor.value > 10;    
+    })
 </script>
 
 
